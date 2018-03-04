@@ -14,7 +14,9 @@
 <div class="container">
 
     <div class="left">
-        <div class="state"></div>
+        <div class="state">
+            <span class="state_percent"><?= $order['state'] ?></span>
+        </div>
         <div class="state_text">
             <span class="bold">Оценка:</span>
             <span class="light">Выше среднего</span>
@@ -33,11 +35,15 @@
 
                 </div>
                 <div id="status" class="tab active">
+                    <h3>Температура</h3>
                     <canvas id="temperature"></canvas>
+                    <h3>Влажность</h3>
                     <canvas id="humidity"></canvas>
+                    <h3>Сохранность</h3>
                     <canvas id="overload"></canvas>
                 </div>
                 <div id="courier" class="tab">
+                    <div class="space"></div>
                     <div id="courier_map"></div>
                 </div>
             </div>
@@ -57,12 +63,12 @@ window.chartColors = {
 	purple: \'rgb(153, 102, 255)\',
 	grey: \'rgb(201, 203, 207)\'
 };
-    var uluru = {lat: ' . $order["position"]["lat"] . ', lng: ' . $order["position"]["lon"] . '};
+    var uluru = {lat: ' . $order["position"][1] . ', lng: ' . $order["position"][0] . '};
     var temp_data={
         labels: [\'' . implode("','", $l) . '\'],
         datasets: [{
             data: [' . implode(",", $t) . '],
-            borderColor: \'rgba(255, 110, 64, 1)\',
+            borderColor: window.chartColors.red,
             borderWidth: 1
         }]
     };
@@ -70,18 +76,23 @@ window.chartColors = {
         labels: [\'' . implode("','", $l) . '\'],
         datasets: [{
             data: [' . implode(",", $h) . '],
-            borderColor: \'rgba(110, 255, 64, 1)\',
+            borderColor: window.chartColors.green,
             borderWidth: 1
         }]
     };
     var over_data={
         labels: [\'' . implode("','", $l) . '\'],
         datasets: [{
-            data: [' . implode(",", $o) . '],
-					fill: false,
-					backgroundColor: window.chartColors.blue,
-					borderColor: window.chartColors.blue,
+            data: [' . implode(",", $a) . '],
+            fill: false,
+            borderColor: window.chartColors.blue,
             borderWidth: 1
+        },{
+            data: [' . implode(",", $o) . '],
+            fill: true,
+            backgroundColor: window.chartColors.red,
+            borderColor: window.chartColors.red,
+            borderWidth: 3
         }]
     };
     </script>'; ?>

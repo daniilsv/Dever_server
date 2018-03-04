@@ -12,8 +12,16 @@ $(function () {
             intersect: false,
             backgroundColor: 'rgba(0, 0, 0, 0)'
         },
-        legend:{
-            display:false
+        legend: {
+            display: false
+        },
+        elements: {
+            point: {
+                radius: 0
+            },
+            line:{
+                tension:0.1
+            }
         },
         axes: {
             display: false
